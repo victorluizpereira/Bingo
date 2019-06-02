@@ -1,0 +1,123 @@
+<!Doctype html>
+<html lang="pt-br">
+<head>
+	<meta charset="utf-8"/>
+	<link rel="stylesheet" type="text/css" href="./styleb.css">
+	<title>Bingo</title>
+</head>
+<body>
+	<div class = "cabecalho">
+		<div class="exibira">
+			<label id="sorte">Valor para sorteio: </label>
+		</div>
+		<h2>Bingo</h2>
+		<div class="caixab">
+			<form class= "botao">
+				<input type="button" onclick="clicar()" value = "SORTEAR">
+			</form>
+		</div>
+	</div>
+	<div class = "bingo">
+	<form>
+		<div>
+		<label>Jogador 1 : </label>
+		<input type="number" id="bloc1" name="caixa1" maxlength="2" min="1" max="10" size="3">
+		<br/>
+		<span id="result">Digite um número</span>
+		</div>
+		<div>
+		<label>Jogador 2 : </label>
+		<input type="number" id="bloc2" name="caixa2" maxlength="2" min="1" max="10" size="3">
+		<br/>
+		<span id="result1">Digite um número</span>
+		</div>
+		<div>
+		<label>Jogador 3 : </label>
+		<input type="number" id="bloc3" name="caixa3" maxlength="2" min="1" max="10" size="3">
+		<br/>
+		<span id="result2">Digite um número</span>
+		</div>
+		<div>
+		<label>Jogador 4 : </label>
+		<input type="number" id="bloc4" name="caixa4" maxlength="2" min="1" max="10" size="3">
+		<br/>
+		<span id="result3">Digite um número</span>
+		</div>
+		<div>
+		<label>Jogador 5 : </label>
+		<input type="number" id="bloc5" name="caixa5" maxlength="2" min="1" max="10" size="3">
+		<br/>
+		<span id="result4">Digite um número</span>
+		</div>
+		<div>
+		<label>Jogador 6 : </label>
+		<input type="number" id="bloc6" name="caixa6" maxlength="2" min="1" max="10" size="3">
+		<br/>
+		<span id="result5">Digite um número</span>
+		</div>
+	</form>
+	</div>
+
+	<script>
+		var num = /^[0-9]/;
+		var input, resultar, valor;
+		var al, concat, x;
+		x = document.getElementById("sorte").textContent;
+
+		function validar(valid){
+			return num.test(valid);
+		}
+
+		function validnum(){
+			if(document.getElementById(input).value == "" || document.getElementById(input).value > 10 || !validar(document.getElementById(input).value)){
+				adicionar("valor inválido");
+				return true;
+			}
+			return false
+		}
+
+		function result(){
+			if(al == document.getElementById(input).value){
+				adicionar("ganhador");
+			}else if(al - document.getElementById(input).value == 1 ||
+					document.getElementById(input).value - al == 1){
+				adicionar("chegou perto");
+				}else{
+					adicionar("Vc não ganhou");
+				}
+		}
+
+		function adicionar(text){
+			document.getElementById(resultar).innerHTML = "<label>"+text+"</label>";
+		}
+
+		function bingo(entrada, label){
+			var condicional;
+			input = entrada;
+			resultar = label; 
+
+			condicional = validnum();
+			if(!condicional){
+				result();
+			}
+		}
+
+		function clicar(){
+			aleatorio();
+			bingo("bloc1", "result");
+			bingo("bloc2", "result1");
+			bingo("bloc3", "result2");
+			bingo("bloc4", "result3");
+			bingo("bloc5", "result4");
+			bingo("bloc6", "result5");
+		}
+
+		function aleatorio(){
+			al = Math.floor(Math.random()*10)+1;
+			concat = x+"<br/>"+al;
+			document.getElementById("sorte").innerHTML = "<label>"+concat+"</label>";
+		}
+
+	</script>
+</body>
+</html>
